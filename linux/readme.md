@@ -24,16 +24,27 @@ Kernel vulns found: 6
 ╔══════════╣ Active Ports (T1049)
 * https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#open-ports
 * Active Ports (ss) (T1049)
-* tcp   LISTEN 0      4096      127.0.0.3%lo:53        0.0.0.0:*          
-* tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*          
-* tcp   LISTEN 0      511                   *:80            *:*          
+
+```bash
+tcp   LISTEN 0      4096      127.0.0.3%lo:53        0.0.0.0:*          
+tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*          
+tcp   LISTEN 0      511                   *:80            *:*
+```
+        
 *  Local-only listeners (loopback) (T1049)
-* tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*          
+
+```bash
+tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*
+```
+    
 *  Unique listener bind addresses (T1049)
-*
-* 127.0.0.1
-* 127.0.0.3%lo
-* 69.69.69.75%enp0s1
+
+```bash
+127.0.0.1
+127.0.0.3%lo
+69.69.69.75%enp0s1
+```
+
 *  Potential local forwarders/relays (T1049)
 www-data  201764  0.0  0.0   7044  1120 pts/2    S+   10:36   0:00 sed -E s,socat|ssh|-L|-R|-D|ncat|nc,?[1;31;103m&?[0m,g
 
