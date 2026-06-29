@@ -6,6 +6,7 @@ This repository focuses on Linux, Windows, Active Directory, containers, and clo
 
 > ⚠️ For educational and authorized lab use only.
 
+![Dirty COW](assets/images/dirty-cow.png)
 
 Begin with 
 ```bash
