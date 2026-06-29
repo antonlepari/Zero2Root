@@ -1,165 +1,58 @@
-# Zero2Root 🚀
-
-> A practical privilege escalation cheatsheet for security professionals, penetration testers, and CTF players.
-
-Zero2Root is a curated collection of privilege escalation techniques, commands, enumeration methods, and exploitation references for both Linux and Windows environments.
-
-The purpose of this repository is to provide a quick reference during labs, Capture The Flag (CTF) competitions, and authorized penetration testing engagements.
-
-> ⚠️ This repository is intended for educational purposes and authorized security assessments only.
-
----
-
 ## 📚 Contents
 
-### Linux Privilege Escalation
-- Basic Enumeration
-- User & Group Enumeration
-- Sudo Misconfigurations
-- SUID/SGID Binaries
-- Capabilities
-- Cron Jobs
-- PATH Hijacking
-- Writable Files
-- NFS Misconfigurations
-- Kernel Exploits
-- Docker & LXC Escapes
-- Systemd Misconfigurations
-- SSH Keys
-- GTFOBins
-- Checklist
+### 🐧 Linux
 
-### Windows Privilege Escalation
-- Basic Enumeration
-- User & Group Enumeration
-- Windows Services
-- Registry Misconfigurations
-- AlwaysInstallElevated
-- Unquoted Service Paths
-- DLL Hijacking
-- Scheduled Tasks
-- Startup Applications
-- Token Impersonation
-- UAC Bypass
-- Credential Hunting
-- SeImpersonatePrivilege
-- JuicyPotato / PrintSpoofer
-- Checklist
+* [Enumeration](./linux/enumeration.md)
+* [Sudo Misconfigurations](./linux/sudo.md)
+* [SUID / SGID](./linux/suid.md)
+* [Capabilities](./linux/capabilities.md)
+* [Cron Jobs](./linux/cron.md)
+* [Docker Escape](./linux/docker.md)
+* [Checklist](./linux/checklist.md)
 
-### Active Directory
-- Enumeration
-- Kerberoasting
-- AS-REP Roasting
-- ACL Abuse
-- Delegation Abuse
-- BloodHound Notes
-- Lateral Movement
+### 🪟 Windows
 
-### Containers
-- Docker
-- Kubernetes
-- Container Escapes
+* [Enumeration](./windows/enumeration.md)
+* [Windows Services](./windows/services.md)
+* [Registry](./windows/registry.md)
+* [Token Impersonation](./windows/token.md)
+* [UAC Bypass](./windows/uac.md)
+* [Checklist](./windows/checklist.md)
 
-### Cloud
-- AWS
-- Azure
-- GCP
+### 🏢 Active Directory
 
-### Cheat Sheets
-- Linux Commands
-- Windows Commands
-- PowerShell
-- Bash
-- Networking
-- File Transfer
-- Reverse Shell
-- TTY Upgrade
+* [Overview](./active-directory/README.md)
 
----
+### 🐳 Containers
 
-# Repository Structure
+* [Overview](./containers/README.md)
 
-```
-Zero2Root/
-│
-├── linux/
-│   ├── enumeration.md
-│   ├── sudo.md
-│   ├── suid.md
-│   ├── capabilities.md
-│   ├── cron.md
-│   ├── docker.md
-│   └── checklist.md
-│
-├── windows/
-│   ├── enumeration.md
-│   ├── services.md
-│   ├── registry.md
-│   ├── token.md
-│   ├── uac.md
-│   └── checklist.md
-│
-├── active-directory/
-│
-├── containers/
-│
-├── cloud/
-│
-├── cheatsheets/
-│
-├── resources/
-│
-└── README.md
-```
+### ☁️ Cloud
 
----
+* [Overview](./cloud/README.md)
 
-# Goals
+### 📖 GTFOBins
 
-- Quick reference during penetration testing
-- Practical privilege escalation notes
-- Organized methodology
-- Real-world techniques
-- Easy to navigate
-- Frequently updated
+* [GTFOBins Index](./gtfobins/README.md)
+* [bash](./gtfobins/bash.md)
+* [find](./gtfobins/find.md)
+* [tar](./gtfobins/tar.md)
+* [vim](./gtfobins/vim.md)
+* [python](./gtfobins/python.md)
 
----
+### 🎓 Workshops
 
-# References
+* [README](./workshops/README.md)
+* [Local Privilege Escalation Workshop](./workshops/lpeworkshop.md)
 
-Some excellent resources that inspired this repository:
+### 📑 Cheat Sheets
 
-- GTFOBins
-- LOLBAS
-- HackTricks
-- PayloadsAllTheThings
-- PEASS-ng
-- Swissky's InternalAllTheThings
+* [Cheat Sheets](./cheatsheets/README.md)
 
----
+### 📚 Resources
 
-# Contributing
-
-Contributions are welcome!
-
-Feel free to submit:
-
-- New techniques
-- Better explanations
-- Additional examples
-- Bug fixes
-- New references
-
----
-
-# Disclaimer
-
-This repository is provided for **educational purposes only**.
-
-The techniques documented here should only be used in environments where you have explicit authorization to perform security testing. The author is not responsible for any misuse of the information provided.
-
----
-
-## ⭐ Support
-
-If you find this project useful, consider giving it a **⭐ Star** to support future updates.
+* [Books](./resources/books.md)
+* [Blogs](./resources/blogs.md)
+* [Tools](./resources/tools.md)
+* [Labs](./resources/labs.md)
+* [Certifications](./resources/certifications.md)
