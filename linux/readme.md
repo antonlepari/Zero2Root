@@ -24,12 +24,11 @@ Kernel vulns found: 6
 ╔══════════╣ Active Ports (T1049)
 * https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#open-ports
 * Active Ports (ss) (T1049)
-  
-| tcp |  LISTEN 0      4096      127.0.0.3%lo:53        0.0.0.0:*          
-| tcp |  LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*          
-| tcp |  LISTEN 0      511                   *:80            *:*          
+* tcp   LISTEN 0      4096      127.0.0.3%lo:53        0.0.0.0:*          
+* tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*          
+* tcp   LISTEN 0      511                   *:80            *:*          
 *  Local-only listeners (loopback) (T1049)
-| tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*          
+* tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*          
 *  Unique listener bind addresses (T1049)
 *
 * 127.0.0.1
