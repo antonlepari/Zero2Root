@@ -48,6 +48,76 @@ tcp   LISTEN 0      80            127.0.0.1:3306      0.0.0.0:*
 *  Potential local forwarders/relays (T1049)
 www-data  201764  0.0  0.0   7044  1120 pts/2    S+   10:36   0:00 sed -E s,socat|ssh|-L|-R|-D|ncat|nc,?[1;31;103m&?[0m,g
 
+╔══════════╣ Useful software (T1082)
+```bash
+/usr/bin/base64
+/usr/bin/curl
+/usr/bin/g++
+/usr/bin/gcc
+/snap/bin/lxc
+/usr/bin/make
+/usr/bin/nc
+/usr/bin/netcat
+/usr/bin/perl
+/usr/bin/php
+/usr/bin/ping
+/usr/bin/python3
+/usr/bin/socat
+/usr/bin/sudo
+/usr/bin/wget
+```
+
+# Files with Interesting Permissions
+## SUID
+``` python
+https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#sudo-and-suid
+-rwsr-xr-x 1 root root 84K Feb  6  2024 /snap/core20/2866/usr/bin/chfn  --->  SuSE_9.3/10
+-rwsr-xr-x 1 root root 52K Feb  6  2024 /snap/core20/2866/usr/bin/chsh
+-rwsr-xr-x 1 root root 87K Feb  6  2024 /snap/core20/2866/usr/bin/gpasswd
+-rwsr-xr-x 1 root root 55K Mar  6 16:20 /snap/core20/2866/usr/bin/mount  --->  Apple_Mac_OSX(Lion)_Kernel_xnu-1699.32.7_except_xnu-1699.24.8
+-rwsr-xr-x 1 root root 44K Feb  6  2024 /snap/core20/2866/usr/bin/newgrp  --->  HP-UX_10.20
+-rwsr-xr-x 1 root root 67K Feb  6  2024 /snap/core20/2866/usr/bin/passwd  --->  Apple_Mac_OSX(03-2006)/Solaris_8/9(12-2004)/SPARC_8/9/Sun_Solaris_2.3_to_2.5.1(02-1997)
+-rwsr-xr-x 1 root root 67K Mar  6 16:20 /snap/core20/2866/usr/bin/su
+-rwsr-xr-x 1 root root 163K Jun 25  2025 /snap/core20/2866/usr/bin/sudo  --->  check_if_the_sudo_version_is_vulnerable
+-rwsr-xr-x 1 root root 39K Mar  6 16:20 /snap/core20/2866/usr/bin/umount  --->  BSD/Linux(08-1996)
+-rwsr-xr-- 1 root systemd-resolve 51K Oct 25  2022 /snap/core20/2866/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+-rwsr-xr-x 1 root root 467K Mar  5 19:37 /snap/core20/2866/usr/lib/openssh/ssh-keysign
+-rwsr-xr-x 1 root root 133K Apr 24  2024 /snap/snapd/21759/usr/lib/snapd/snap-confine  --->  Ubuntu_snapd<2.37_dirty_sock_Local_Privilege_Escalation(CVE-2019-7304)
+-rwsr-xr-x 1 root root 43K Jun 27 19:36 /usr/local/bin/env
+-rwsr-xr-x 1 root root 55K Mar  6 16:10 /usr/bin/su
+-rwsr-xr-x 1 root root 31K Apr 10 10:59 /usr/bin/pkexec  --->  Linux4.10_to_5.1.17(CVE-2019-13272)/rhel_6(CVE-2011-1485)/Generic_CVE-2021-4034
+-rwsr-xr-x 1 root root 71K Feb  6  2024 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 227K Mar  2 13:08 /usr/bin/sudo  --->  check_if_the_sudo_version_is_vulnerable
+-rwsr-xr-x 1 root root 35K Mar 23  2022 /usr/bin/fusermount3
+-rwsr-xr-x 1 root root 44K Feb  6  2024 /usr/bin/chsh
+-rwsr-xr-x 1 root root 72K Feb  6  2024 /usr/bin/chfn  --->  SuSE_9.3/10
+-rwsr-xr-x 1 root root 59K Feb  6  2024 /usr/bin/passwd  --->  Apple_Mac_OSX(03-2006)/Solaris_8/9(12-2004)/SPARC_8/9/Sun_Solaris_2.3_to_2.5.1(02-1997)
+-rwsr-xr-x 1 root root 40K Feb  6  2024 /usr/bin/newgrp  --->  HP-UX_10.20
+-rwsr-xr-x 1 root root 47K Mar  6 16:10 /usr/bin/mount  --->  Apple_Mac_OSX(Lion)_Kernel_xnu-1699.32.7_except_xnu-1699.24.8
+-rwsr-xr-x 1 root root 35K Mar  6 16:10 /usr/bin/umount  --->  BSD/Linux(08-1996)
+-rwsr-xr-x 1 root root 331K Apr 28 00:38 /usr/lib/openssh/ssh-keysign
+-rwsr-xr-- 1 root messagebus 35K Oct 25  2022 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+-rwsr-xr-x 1 root root 23K Apr 10 10:59 /usr/libexec/polkit-agent-helper-1
+-rwsr-xr-x 1 root root 381K Oct 17  2025 /opt/VBoxGuestAdditions-7.2.4/bin/VBoxDRMClient (Unknown SUID binary!)
+```
+/bin/env is insterting. Check GTFObins!
+
+# SGID
+``` perl
+https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#sudo-and-suid
+-rwxr-sr-x 1 root shadow 83K Feb  6  2024 /snap/core20/2866/usr/bin/chage
+-rwxr-sr-x 1 root shadow 31K Feb  6  2024 /snap/core20/2866/usr/bin/expiry
+-rwxr-sr-x 1 root systemd-timesync 343K Mar  5 19:37 /snap/core20/2866/usr/bin/ssh-agent
+-rwxr-sr-x 1 root shadow 43K Jan 10  2024 /snap/core20/2866/usr/sbin/pam_extrausers_chkpwd
+-rwxr-sr-x 1 root shadow 43K Jan 10  2024 /snap/core20/2866/usr/sbin/unix_chkpwd
+-rwxr-sr-x 1 root crontab 39K Mar 23  2022 /usr/bin/crontab
+-rwxr-sr-x 1 root shadow 71K Feb  6  2024 /usr/bin/chage
+-rwxr-sr-x 1 root _ssh 287K Apr 28 00:38 /usr/bin/ssh-agent
+-rwxr-sr-x 1 root shadow 23K Feb  6  2024 /usr/bin/expiry
+-rwxr-sr-x 1 root utmp 15K Mar 24  2022 /usr/lib/x86_64-linux-gnu/utempter/utempter
+-rwxr-sr-x 1 root shadow 27K Jun 12  2025 /usr/sbin/unix_chkpwd
+-rwxr-sr-x 1 root shadow 23K Jun 12  2025 /usr/sbin/pam_extrausers_chkpwd
+```
 
 
 <br><br><br><br><br><br>
