@@ -157,8 +157,25 @@ Kernel merupakan bagian inti pada sebuah OS. Berfungsi untuk mengatur/menghubung
 ```
 
 ## SUID
-```bash
+SUID (Set owner User ID) is a special Linux file permission that allows a user to execute an executable file with the permissions of the file owner rather than the user running it. <br>
+
+SUID (Set User ID) adalah hak akses spesial di Linux yang memungkinkan pengguna biasa menjalankan suatu program atau file biner dengan hak akses pemilik (biasanya `root`) program tersebut.
+
+```perl
 find / -perm -u=s -type f 2>/dev/null
+
+Finding Privilege Escalation Vectors (SUID/SGID)
+
+* Find SUID files:
+find / -perm -4000 -type f 2>/dev/null
+
+* Find SGID files:
+find / -perm -2000 -type f 2>/dev/null
+
+* Find both SUID and SGID files:
+find / -perm /6000 -type f 2>/dev/null
+
+SUID typically refers to Sudden Unexpected Infant Death, which is an umbrella term for any sudden and unexpected infant death (under 1 year of age) before or after an investigation. This category includes both explainable causes (such as accidents or suffocation) and unexplainable causes (like SIDS).
 ```
 
 ## SUID
