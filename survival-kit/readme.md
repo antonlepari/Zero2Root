@@ -1,4 +1,17 @@
-# Cheat Sheet — Lab Reference
+# 👋 Hello, World!
+
+<div align="center">
+
+# 🚀 Survival Kit
+
+*"Learn. Build. Break. Fix. Repeat."*
+
+![Profile Views](https://komarev.com/ghpvc/?username=antonlepari&color=blue)
+![GitHub followers](https://img.shields.io/github/followers/antonlepari?style=social)
+![GitHub Stars](https://img.shields.io/github/stars/antonlepari?style=social)
+
+</div>
+
 
 Ingat perintah berikut:
 ```bash
