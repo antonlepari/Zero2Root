@@ -110,7 +110,7 @@ ${ 7 * 7 }
 
 ```
 
-Reverse Shell dari Pentest Monkey 
+Reverse Shell dari Pentest Monkey (especially after Command Injecting `ping google.com;id`) 
 ```bash
 September 4, 2011
 
